@@ -107,7 +107,7 @@ const SalesSummary = () => {
         const hour = new Date(sale.sale_date).getHours();
         salesByHour[hour] += parseFloat(sale.total_price || 0);
       });
-
+  
       return {
         labels: Array.from({ length: 24 }, (_, i) => `${i} น.`),
         datasets: [{
@@ -122,26 +122,20 @@ const SalesSummary = () => {
         }]
       };
     }
-
+  
     if (period === "month") {
-      const years = [...new Set(sales.map(sale => new Date(sale.sale_date).getFullYear()))].sort();
       const salesByMonth = Array(12).fill(0);
-
+  
       sales.forEach((sale) => {
         const saleDate = new Date(sale.sale_date);
-        const saleYear = saleDate.getFullYear();
         const saleMonth = saleDate.getMonth();
-
-        // ถ้าเลือกเดือนเฉพาะ ให้กรองข้อมูลเฉพาะเดือนนั้น
-        if (selectedDate && new Date(selectedDate).getFullYear() === saleYear) {
-          salesByMonth[saleMonth] += parseFloat(sale.total_price || 0);
-        }
+        salesByMonth[saleMonth] += parseFloat(sale.total_price || 0);
       });
-
+  
       const monthNames = Array.from({ length: 12 }, (_, i) =>
         new Date(2023, i).toLocaleDateString("th-TH", { month: "short" })
       );
-
+  
       return {
         labels: monthNames,
         datasets: [{
@@ -156,11 +150,11 @@ const SalesSummary = () => {
         }]
       };
     }
-
+  
     if (period === "year") {
       const years = [...new Set(sales.map(sale => new Date(sale.sale_date).getFullYear()))].sort();
       const salesByYear = Array(years.length).fill(0);
-
+  
       sales.forEach((sale) => {
         const saleYear = new Date(sale.sale_date).getFullYear();
         const yearIndex = years.indexOf(saleYear);
@@ -168,7 +162,7 @@ const SalesSummary = () => {
           salesByYear[yearIndex] += parseFloat(sale.total_price || 0);
         }
       });
-
+  
       return {
         labels: years.map(year => `${year}`),
         datasets: [{
@@ -183,7 +177,7 @@ const SalesSummary = () => {
         }]
       };
     }
-
+  
     return {
       labels: [],
       datasets: []
@@ -586,6 +580,7 @@ const SalesSummary = () => {
       {/* ตารางแสดงรายละเอียด */}
       <Paper elevation={3} sx={{
         borderRadius: 2,
+        
         overflow: "hidden",
         bgcolor: "white",
         width: "85%",

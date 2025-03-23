@@ -12,6 +12,7 @@ class Product(models.Model):
         ('blended', 'ปั่น'),
         ('iced', 'เย็น'),
     ]
+
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, unique=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)

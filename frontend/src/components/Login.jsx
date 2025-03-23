@@ -46,8 +46,8 @@ const Login = () => {
             sx={{
               backgroundImage:
                 'url("https://st.depositphotos.com/2235295/2688/i/450/depositphotos_26885089-stock-photo-coffee-cup-with-jute-bag.jpg")',
-              backgroundSize: "1205px",
-              width: "150vh",
+              backgroundSize: "1250px",
+              width: "156vh",
               height: "97.7vh",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",

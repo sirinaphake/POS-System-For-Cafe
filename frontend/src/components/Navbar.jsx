@@ -23,7 +23,7 @@ import LogoutIcon from "@mui/icons-material/Logout"
 import MenuIcon from "@mui/icons-material/Menu"
 import Snackbar from "@mui/material/Snackbar"
 import Alert from "@mui/material/Alert"
-import Avatar from "@mui/material/Avatar" // เพิ่ม Avatar
+import Avatar from "@mui/material/Avatar" 
 import AxiosInstance from './AxiosInstance'
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
@@ -278,7 +278,7 @@ export default function Navbar(props) {
                     margin: "2px 0",
                   }}
                 >
-                  <ListItemText primary="สินค้าคลัง" />
+                  <ListItemText primary="สินค้า" />
                 </ListItemButton>
               </List>
             </Collapse>

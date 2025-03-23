@@ -6,6 +6,8 @@ import {
 } from '@mui/material';
 import { Edit, Delete } from '@mui/icons-material';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Box as ThreeBox, Sphere, Sky, Environment, Lightformer } from '@react-three/drei';
 
 const categories = [
   { value: 'coffee', label: 'กาแฟ' },
@@ -19,6 +21,33 @@ const categories = [
 const getCategoryLabel = (value) => {
   const category = categories.find(cat => cat.value === value);
   return category ? category.label : value;
+};
+
+const RotatingBox = () => {
+  const myMesh = React.useRef();
+  useFrame(({ clock }) => {
+    myMesh.current.rotation.x = clock.getElapsedTime();
+    myMesh.current.rotation.y = clock.getElapsedTime();
+  });
+  return (
+    <ThreeBox ref={myMesh}>
+      <meshStandardMaterial color={'#6d4c41'} />
+    </ThreeBox>
+  );
+};
+
+const BackgroundScene = () => {
+  return (
+    <Canvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} />
+      <RotatingBox />
+      <OrbitControls />
+      <Sky sunPosition={[100, 10, 100]} />
+      <Environment preset="city" />
+      <Lightformer intensity={2} position={[0, 5, 0]} />
+    </Canvas>
+  );
 };
 
 const ManageMenu = () => {
@@ -122,6 +151,7 @@ const ManageMenu = () => {
       margin: '5px 30px 190px 252px',
       borderRadius: '10px',
     }}>
+      <BackgroundScene />
       <Container maxWidth="lg">
         <Typography variant="h3" align="center" gutterBottom sx={{
           marginTop: 1,
@@ -138,7 +168,7 @@ const ManageMenu = () => {
         <Button
           variant="contained"
           component={motion.button}
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.05, rotate: [0, 10, -10, 0] }}
           whileTap={{ scale: 0.95 }}
           sx={{
             backgroundColor: '#6d4c41',
