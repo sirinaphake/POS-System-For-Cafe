@@ -1,7 +1,0 @@
-tunnels:
-  web1:
-    addr: 5173
-    proto: http
-  web2:
-    addr: 8000
-    proto: http

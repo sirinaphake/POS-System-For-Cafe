@@ -1,4 +1,5 @@
 .env
 .env.*
 !.env.example
-frontend/dist/
+frontend/dist/ngrok.exe
+ngrok.yml
